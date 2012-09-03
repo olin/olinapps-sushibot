@@ -2,96 +2,224 @@
 
 <script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
 
+<style>
+body { margin: 10px auto 20px; width: 600px;font-size: 16px; font-family: "Helvetica Neue", Arial; line-height: 1.4;}
+#list p { display: block; margin: 5px 0 15px;}
+#list p input { width: 3em; margin-right: 10px; font-size: 1.1em; text-align: center;  }
+#list p span { font-style: italic; margin-left: 5.5em; display: block; font-size: 0.8em; }
+#list p input.changed { font-weight: bold; color: #f00; background: #afc;}
+button { font-size: 1.9em; font-weight: bold; margin: 0 auto; display: block;}
+.info, .warning { display: block; padding: 10px 15px; margin: 10px 0; text-align: center; font-size: 0.9em; }
+.warning{ background: #fc9;  }
+.info { background: #9cf; }
+#receipt { font-family: inherit; text-align: center; display: inline-block; box-shadow: 2px 2px 0 #ddd; border: 1px solid #aaa; padding: 5px 10px; background: #ffe;}
+.bottom { margin: 6em 0 2em; font-size: 0.8em; text-align: center; }
+</style>
+
 <script>
+var sushi = {
+	"M1": {
+		"name": "Cucumber, Avocado or Asparagus Maki",
+		"description": ""
+	},
+	"M2": {
+		"name": "Oshinko Maki",
+		"description": "Japanese pickles"
+	},
+	"M3": {
+		"name": "Mango Maki ",
+		"description": "Mango and cucumber"
+	},
+	"M4": {
+		"name": "AAC Maki ",
+		"description": "Asparagus, avocado, cucumber"
+	},
+	"M5": {
+		"name": "Triple A Maki ",
+		"description": "Asparagus, apple, avocado"
+	},
+	"M6": {
+		"name": "Tempura Shiitake Mushroom Maki ",
+		"description": "with unagi sauce"
+	},
+	"M7": {
+		"name": "Idaho Maki ",
+		"description": "Deep fried sweet yam with unagi sauce"
+	},
+	"M8": {
+		"name": "Sweet Maki ",
+		"description": "Inari, cucumber, tamago"
+	},
+	"M9": {
+		"name": "Vegetarian Futo Maki ",
+		"description": "Inari, tamago, cucumber, avocado, Oshinko"
+	},
+	"M10": {
+		"name": "Celtics Maki ",
+		"description": "Avocado, tempura sweet yam, tobiko, yuzu miso sauce and berries"
+	},
+	"M11": {
+		"name": "Tekka Maki ",
+		"description": "Tuna"
+	},
+	"M12": {
+		"name": "Sake Maki ",
+		"description": "Salmon"
+	},
+	"M13": {
+		"name": "Negi-Hama Maki ",
+		"description": "Yellowtail with scallions"
+	},
+	"M14": {
+		"name": "Tuna and Avocado Maki",
+		"description": ""
+	},
+	"M15": {
+		"name": "Spicy Tuna Maki / Spicy White Tuna Maki ",
+		"description": "Tuna or white tuna, tempura flakes, scallion and spicy mayo"
+	},
+	"M16": {
+		"name": "Spicy Salmon Maki ",
+		"description": "Salmon, cucumber, spicy mayo"
+	},
+	"M17": {
+		"name": "Mackerel Maki ",
+		"description": "Pickled Mackerel, cucumber, ginger, jalapeno, and scallion"
+	},
+	"M18": {
+		"name": "Alaskan Maki ",
+		"description": "Salmon and avocado"
+	},
+	"M19": {
+		"name": "Philadelphia Maki ",
+		"description": "Smoked salmon, cucumber, scallions and cream cheese"
+	},
+	"M20": {
+		"name": "Spicy Scallop Maki ",
+		"description": "Scallop, tobiko, cucumber, spicy mayo"
+	},
+	"M21": {
+		"name": "Rising Sun Maki ",
+		"description": "Salmon, cucumber, avocado, tempura flakes, spicy mayo"
+	},
+	"M22": {
+		"name": "California Maki ",
+		"description": "Crab stick, cucumber, avocado and tobiko"
+	},
+	"M23": {
+		"name": "Classic California Maki ",
+		"description": "Real crab meat, cucumber, avocado, and tobiko"
+	},
+	"M24": {
+		"name": "Harmony Maki ",
+		"description": "Baked fish, cucumber, avocado, scallions, sriracha sauce"
+	},
+	"M25": {
+		"name": "Tempura White Tuna Maki ",
+		"description": "with unagi sauce"
+	},
+	"M26": {
+		"name": "Unagi Maki ",
+		"description": "Eel w/ cucumber OR avocado with unagi sauce"
+	},
+	"M27": {
+		"name": "Shrimp with Avocado Maki",
+		"description": ""
+	},
+	"M28": {
+		"name": "Baked Salmon and Avocado Maki",
+		"description": ""
+	},
+	"M29": {
+		"name": "Spicy Shrimp and Mango Maki",
+		"description": ""
+	},
+	"M30": {
+		"name": "Crazy Maki ",
+		"description": "Shrimp tempura, cucumber, avocado, tobiko, and spicy mayo"
+	},
+	"M31": {
+		"name": "Shrimp Tempura Maki ",
+		"description": "Shrimp Tempura, unagi sauce and tobiko"
+	},
+	"M32": {
+		"name": "Soft Shell Crab Maki ",
+		"description": "Soft shell crab, cucumber, avocado, tobiko, unagi sauce and spicy mayo"
+	},
+	"M33": {
+		"name": "Salmon Monster Jr. Maki ",
+		"description": "Baked salmon, crab stick, cucumber, avocado, tobiko, scallions, spicy creamy sauce"
+	}
+};
+
 $(function () {
-	$('b').each(function () {
-		var $b = $(this), a = document.createElement('a');
-		a.href = 'https://venmo.com/olinsushi?txn=pay&amount=6&note=for%201x' + encodeURIComponent(($b.text().match(/^M[0-9]+/) || [])[0])
-		$b.wrap(a);
+	for (var key in sushi) {
+		var p = document.createElement('p');
+		var name = document.createElement('b');
+		var input = document.createElement('input');
+		input.type = 'number';
+		input.name = key;
+		input.min = '0';
+		input.value = 0;
+		$(name).text('(' + key + ') ' + sushi[key].name);
+		var desc = document.createElement('span');
+		$(desc).text(sushi[key].description);
+		$(p).append(input, name, desc);
+		$('#list').append(p);
+		/*<input type="number" name="m1" min="0" step="1" value="0" /></p></li>*/
+	}
+
+	var link = 'http://venmo.com/olinsushi?txn=charge&amount=0&note=Sake Maki';
+
+	$('input').on('change', function () {
+		$(this).addClass('changed');
+		var data = $('form').serializeArray();
+		var str = [];
+		var info = [];
+		var cost = 0;
+		$.each(data, function (i, item) {
+			if (Number(item.value) && Number(item.value) > 0 && !isNaN(Number(item.value))) {
+				str.push(item.value + 'x' + item.name);
+				cost += Number(item.value) * 6;
+				info.push(item.value + ' x ' + sushi[item.name].name);
+			}
+		})
+		$('button').prop('disabled', !str.length).text('Place order for $' + cost + ' of tasty sushi')
+		$('#receipt').text(info.join('\n'))
+		link = 'http://venmo.com/olinsushi?txn=pay&amount=' + encodeURIComponent(cost) + '&note=' + encodeURIComponent(str.join(' '));
+		console.log('cost:', cost, 'key:', str.join(' '))
+	})
+
+	$('form').on('submit', function () {
+		return false;
+	});
+
+	$('button').on('click', function () {
+		window.location.href = link;
 	})
 })
+
 </script>
 
 <h1>Sunday Sushi @ Olin</h1>
 
-<p><big>$6 per roll, tax/delivery inclusive. <strong><i>Orders taken until 8:45 p.m., distributed from EH4N when it's delivered.</i></strong></big></p>
+<p class="info"><big>$6 per roll, tax/delivery inclusive. <strong><i>Orders taken until <u>8:45 p.m.</u>, distributed from EH4N when it's delivered.</i></strong></big><br><br>
+	<a href="http://www.garifusion.com/MakiMadness.html">From Gari Fusion:</a> <strong>MAKIMONO (SUSHI ROLLS)</strong> Japanese rolls, typically sliced into 5-8 pieces.</p>
 
-<p><a href="http://www.garifusion.com/MakiMadness.html">From Gari Fusion:</a> <strong>MAKIMONO (SUSHI ROLLS)</strong> Japanese rolls, typically sliced into 5-8 pieces.</p>
+<form>
+<div id="list">
+</div>
+</form>
 
-<h1>Vegetarian</h1>
+<p class="warning"><i>Click the button below, and pay the dollar amount provided to confirm your order. DO NOT change the Note field, or else your order won't be registered properly!</i></p>
 
-<ol>
-<li><p><b>M1 Cucumber, Avocado or Asparagus Maki</b></p></li>
-<li><p><b>M2 Oshinko Maki</b><br />
-Japanese pickles</p></li>
-<li><p><b>M3 Mango Maki </b><br />
-Mango and cucumber</p></li>
-<li><p><b>M4 AAC Maki </b><br />
-Asparagus, avocado, cucumber</p></li>
-<li><p><b>M5 Triple A Maki </b><br />
-Asparagus, apple, avocado</p></li>
-<li><p><b>M6 Tempura Shiitake Mushroom Maki </b><br />
-with unagi sauce</p></li>
-<li><p><b>M7 Idaho Maki </b><br />
-Deep fried sweet yam with unagi sauce</p></li>
-<li><p><b>M8 Sweet Maki </b><br />
-Inari, cucumber, tamago</p></li>
-<li><p><b>M9 Vegetarian Futo Maki </b><br />
-Inari, tamago, cucumber, avocado, Oshinko</p></li>
-<li><p><b>M10 Celtics Maki </b><br />
-Avocado, tempura sweet yam, tobiko, yuzu miso sauce and berries</p></li>
-</ol>
+<div style="text-align: center">
+<pre id="receipt"></pre>
+</div>
 
-<h1>Raw</h1>
+<button disabled>no sushi selected</button>
+<p style="text-align: center">You'll be notified when it's delivered, around 10PM.</p>
 
-<ol>
-<li><p><b>M11 Tekka Maki </b><br />
-Tuna</p></li>
-<li><p><b>M12 Sake Maki </b><br />
-Salmon</p></li>
-<li><p><b>M13 Negi-Hama Maki </b><br />
-Yellowtail with scallions</p></li>
-<li><p><b>M14 Tuna and Avocado Maki</p></b></li>
-<li><p><b>M15 Spicy Tuna Maki / Spicy White Tuna Maki </b><br />
-Tuna or white tuna, tempura flakes, scallion and spicy mayo</p></li>
-<li><p><b>M16 Spicy Salmon Maki </b><br />
-Salmon, cucumber, spicy mayo</p></li>
-<li><p><b>M17 Mackerel Maki </b><br />
-Pickled Mackerel, cucumber, ginger, jalapeno, and scallion</p></li>
-<li><p><b>M18 Alaskan Maki </b><br />
-Salmon and avocado</p></li>
-<li><p><b>M19 Philadelphia Maki </b><br />
-Smoked salmon, cucumber, scallions and cream cheese</p></li>
-<li><p><b>M20 Spicy Scallop Maki </b><br />
-Scallop, tobiko, cucumber, spicy mayo</p></li>
-<li><p><b>M21 Rising Sun Maki </b><br />
-Salmon, cucumber, avocado, tempura flakes, spicy mayo</p></li>
-</ol>
+<p class="bottom">Olin Sushi is done by <a href="mailto:timothy.ryan@students.olin.edu">Tim Ryan!</a> Go bug him</p>
 
-<h1>Cooked</h1>
-
-<ol>
-<li><p><b>M22 California Maki </b><br />
-Crab stick, cucumber, avocado and tobiko</p></li>
-<li><p><b>M23 Classic California Maki </b><br />
-Real crab meat, cucumber, avocado, and tobiko</p></li>
-<li><p><b>M24 Harmony Maki </b><br />
-Baked fish, cucumber, avocado, scallions, sriracha sauce</p></li>
-<li><p><b>M25 Tempura White Tuna Maki </b><br />
-with unagi sauce</p></li>
-<li><p><b>M26 Unagi Maki </b><br />
-Eel w/ cucumber OR avocado with unagi sauce</p></li>
-<li><p><b>M27 Shrimp with Avocado Maki</p></b></li>
-<li><p><b>M28 Baked Salmon and Avocado Maki</p></b></li>
-<li><p><b>M29 Spicy Shrimp and Mango Maki</p></b></li>
-<li><p><b>M30 Crazy Maki </b><br />
-Shrimp tempura, cucumber, avocado, tobiko, and spicy mayo</p></li>
-<li><p><b>M31 Shrimp Tempura Maki </b><br />
-Shrimp Tempura, unagi sauce and tobiko</p></li>
-<li><p><b>M32 Soft Shell Crab Maki </b><br />
-Soft shell crab, cucumber, avocado, tobiko, unagi sauce and spicy mayo</p></li>
-<li><p><b>M33 Salmon Monster Jr. Maki </b><br />
-Baked salmon, crab stick, cucumber, avocado, tobiko, scallions,
-spicy creamy sauce</p></li>
-</ol>
-
+</form>
