@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+
+<script>
+$(function () {
+	$('b').each(function () {
+		var $b = $(this), a = document.createElement('a');
+		a.href = 'https://venmo.com/olinsushi?txn=pay&amount=6&note=for%201x' + encodeURIComponent(($b.text().match(/^M[0-9]+/) || [])[0])
+		$b.wrap(a);
+	})
+})
+</script>
+
+<h1>Sunday Sushi @ Olin</h1>
+
+<p><big>$6 per roll, tax/delivery inclusive. <strong><i>Orders taken until 8:45 p.m., distributed from EH4N when it's delivered.</i></strong></big></p>
+
+<p><a href="http://www.garifusion.com/MakiMadness.html">From Gari Fusion:</a> <strong>MAKIMONO (SUSHI ROLLS)</strong> Japanese rolls, typically sliced into 5-8 pieces.</p>
+
+<h1>Vegetarian</h1>
+
+<ol>
+<li><p><b>M1 Cucumber, Avocado or Asparagus Maki</b></p></li>
+<li><p><b>M2 Oshinko Maki</b><br />
+Japanese pickles</p></li>
+<li><p><b>M3 Mango Maki </b><br />
+Mango and cucumber</p></li>
+<li><p><b>M4 AAC Maki </b><br />
+Asparagus, avocado, cucumber</p></li>
+<li><p><b>M5 Triple A Maki </b><br />
+Asparagus, apple, avocado</p></li>
+<li><p><b>M6 Tempura Shiitake Mushroom Maki </b><br />
+with unagi sauce</p></li>
+<li><p><b>M7 Idaho Maki </b><br />
+Deep fried sweet yam with unagi sauce</p></li>
+<li><p><b>M8 Sweet Maki </b><br />
+Inari, cucumber, tamago</p></li>
+<li><p><b>M9 Vegetarian Futo Maki </b><br />
+Inari, tamago, cucumber, avocado, Oshinko</p></li>
+<li><p><b>M10 Celtics Maki </b><br />
+Avocado, tempura sweet yam, tobiko, yuzu miso sauce and berries</p></li>
+</ol>
+
+<h1>Raw</h1>
+
+<ol>
+<li><p><b>M11 Tekka Maki </b><br />
+Tuna</p></li>
+<li><p><b>M12 Sake Maki </b><br />
+Salmon</p></li>
+<li><p><b>M13 Negi-Hama Maki </b><br />
+Yellowtail with scallions</p></li>
+<li><p><b>M14 Tuna and Avocado Maki</p></b></li>
+<li><p><b>M15 Spicy Tuna Maki / Spicy White Tuna Maki </b><br />
+Tuna or white tuna, tempura flakes, scallion and spicy mayo</p></li>
+<li><p><b>M16 Spicy Salmon Maki </b><br />
+Salmon, cucumber, spicy mayo</p></li>
+<li><p><b>M17 Mackerel Maki </b><br />
+Pickled Mackerel, cucumber, ginger, jalapeno, and scallion</p></li>
+<li><p><b>M18 Alaskan Maki </b><br />
+Salmon and avocado</p></li>
+<li><p><b>M19 Philadelphia Maki </b><br />
+Smoked salmon, cucumber, scallions and cream cheese</p></li>
+<li><p><b>M20 Spicy Scallop Maki </b><br />
+Scallop, tobiko, cucumber, spicy mayo</p></li>
+<li><p><b>M21 Rising Sun Maki </b><br />
+Salmon, cucumber, avocado, tempura flakes, spicy mayo</p></li>
+</ol>
+
+<h1>Cooked</h1>
+
+<ol>
+<li><p><b>M22 California Maki </b><br />
+Crab stick, cucumber, avocado and tobiko</p></li>
+<li><p><b>M23 Classic California Maki </b><br />
+Real crab meat, cucumber, avocado, and tobiko</p></li>
+<li><p><b>M24 Harmony Maki </b><br />
+Baked fish, cucumber, avocado, scallions, sriracha sauce</p></li>
+<li><p><b>M25 Tempura White Tuna Maki </b><br />
+with unagi sauce</p></li>
+<li><p><b>M26 Unagi Maki </b><br />
+Eel w/ cucumber OR avocado with unagi sauce</p></li>
+<li><p><b>M27 Shrimp with Avocado Maki</p></b></li>
+<li><p><b>M28 Baked Salmon and Avocado Maki</p></b></li>
+<li><p><b>M29 Spicy Shrimp and Mango Maki</p></b></li>
+<li><p><b>M30 Crazy Maki </b><br />
+Shrimp tempura, cucumber, avocado, tobiko, and spicy mayo</p></li>
+<li><p><b>M31 Shrimp Tempura Maki </b><br />
+Shrimp Tempura, unagi sauce and tobiko</p></li>
+<li><p><b>M32 Soft Shell Crab Maki </b><br />
+Soft shell crab, cucumber, avocado, tobiko, unagi sauce and spicy mayo</p></li>
+<li><p><b>M33 Salmon Monster Jr. Maki </b><br />
+Baked salmon, crab stick, cucumber, avocado, tobiko, scallions,
+spicy creamy sauce</p></li>
+</ol>
+
