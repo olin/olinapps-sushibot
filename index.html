@@ -186,7 +186,7 @@ $(function () {
 		})
 		$('button').prop('disabled', !str.length).text('Place order for $' + cost + ' of tasty sushi')
 		$('#receipt').text(info.join('\n'))
-		link = 'http://venmo.com/olinsushi?txn=pay&amount=' + encodeURIComponent(cost) + '&note=' + encodeURIComponent(str.join(' '));
+		link = 'http://venmo.com/olinsushi?txn=pay&amount=' + encodeURIComponent(cost) + '&note=for ' + encodeURIComponent(str.join(' '));
 		console.log('cost:', cost, 'key:', str.join(' '))
 	})
 
@@ -211,7 +211,7 @@ $(function () {
 </div>
 </form>
 
-<p class="warning"><i>Click the button below, and pay the dollar amount provided to confirm your order. DO NOT change the Note field, or else your order won't be registered properly!</i></p>
+<p class="warning"><i>Click the button below to pay with Venmo. Don't change the "Note:" field!</i></p>
 
 <div style="text-align: center">
 <pre id="receipt"></pre>
