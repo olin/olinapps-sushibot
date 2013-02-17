@@ -152,6 +152,8 @@ var sushi = {
 	}
 };
 
+var PRICE = 6.50;
+
 $(function () {
 	for (var key in sushi) {
 		var p = document.createElement('p');
@@ -180,11 +182,11 @@ $(function () {
 		$.each(data, function (i, item) {
 			if (Number(item.value) && Number(item.value) > 0 && !isNaN(Number(item.value))) {
 				str.push(item.value + 'x' + item.name);
-				cost += Number(item.value) * 6;
+				cost += Number(item.value) * PRICE;
 				info.push(item.value + ' x ' + sushi[item.name].name);
 			}
 		})
-		$('button').prop('disabled', !str.length).text('Place order for $' + cost + ' of tasty sushi')
+		$('button').prop('disabled', !str.length).text('Place order for $' + cost.toFixed(2) + ' of tasty sushi')
 		$('#receipt').text(info.join('\n'))
 		link = 'http://venmo.com/olinsushi?txn=pay&amount=' + encodeURIComponent(cost) + '&note=for sushi (' + encodeURIComponent(str.join(' ')) + ')';
 		console.log('cost:', cost, 'key:', str.join(' '))
@@ -203,9 +205,7 @@ $(function () {
 
 <h1>Sunday Sushi @ Olin</h1>
 
-<h1 style="color:red">10/14: Open for EH4 orders today.</h1>
-
-<p class="info"><big>$6 per roll, tax/delivery inclusive. <strong><i>Orders taken until <u>6:00 p.m.</u>, distributed from EH4N when it's delivered and sorted (~8:00 p.m.).</i></strong></big><br><br>
+<p class="info"><big>$6 per roll, tax/delivery inclusive. <strong style="color:red"><i>Orders taken until <u>5:45 p.m.</u>, and will arrive at about 7:00 in EH4.</i></strong></big><br><br>
 	<a href="http://www.garifusion.com/MakiMadness.html">From Gari Fusion:</a> <strong>MAKIMONO (SUSHI ROLLS)</strong> Japanese rolls, typically sliced into 5-8 pieces.</p>
 
 <form>
@@ -213,7 +213,7 @@ $(function () {
 </div>
 </form>
 
-<p class="warning"><i>Click the button below to pay with Venmo. Don't change the "Note:" field!</i></p>
+<p class="warning"><i>Click the button below to pay with Venmo. Note: Don't change the "Note:" field!</i></p>
 
 <div style="text-align: center">
 <pre id="receipt"></pre>
